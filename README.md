@@ -1,1 +1,1 @@
-# Gallows
+# Gallows game
