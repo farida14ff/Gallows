@@ -100,7 +100,7 @@ public class Screen {
 
 
 
-		
+
 		//dodaj ActionListener
 		ButtonA.addActionListener(new LetterListener(ButtonA, status, word));
 		ButtonB.addActionListener(new LetterListener(ButtonB, status, word));
