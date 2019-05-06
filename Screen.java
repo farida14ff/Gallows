@@ -1,216 +1,145 @@
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.*;
 
-public class Screen extends WordM{
+public class Screen {
 	JFrame frame=null;
 	String secret=null;
-//	Canvas canvas;
-
-	//MyDrawPanel slika;
-	MyDrawPanel5 myDrawPanel5;
-	MyDrawPanel2 myDrawPanel2;
-	MyDrawPanel3 myDrawPanel3;
-
-
+	MyDrawPanel slika;
 	public void go(String word, String secret, int status, String message, boolean visibility) {
 
-
 		//prozor
-		//Graphics graphics = new Graphics()
-		//Cell(graphics);
 		frame = new JFrame("Gallows pole!");
 		JPanel letterPanel = new JPanel();
-		//canvas = new Canvas();
-		//canvas.setSize(900,700);
-		//frame.add(canvas);
 		JPanel wordPanel = new JPanel();
-		//wordPanel.setBackground(Color.BLUE);
 		this.secret=secret;
 
 		//gumbi
-//		JButton ButtonA = new JButton("A");
-//		JButton ButtonB = new JButton("B");
-//		JButton ButtonC = new JButton("C");
-//		JButton ButtonD = new JButton("D");
-//		JButton ButtonE = new JButton("E");
-//		JButton ButtonF = new JButton("F");
-//		JButton ButtonG = new JButton("G");
-//		JButton ButtonH = new JButton("H");
-//		JButton ButtonI = new JButton("I");
-//		JButton ButtonJ = new JButton("J");
-//		JButton ButtonK = new JButton("K");
-//		JButton ButtonL = new JButton("L");
-//		JButton ButtonM = new JButton("M");
-//		JButton ButtonN = new JButton("N");
-//		JButton ButtonO = new JButton("O");
-//		JButton ButtonP = new JButton("P");
-//		JButton ButtonQ = new JButton("Q");
-//		JButton ButtonR = new JButton("R");
-//		JButton ButtonS = new JButton("S");
-//		JButton ButtonT = new JButton("T");
-//		JButton ButtonU = new JButton("U");
-//		JButton ButtonV = new JButton("V");
-//		JButton ButtonW = new JButton("W");
-//		JButton ButtonX = new JButton("X");
-//		JButton ButtonY = new JButton("Y");
-//		JButton ButtonZ = new JButton("Z");
-//		//JButton Restart = new JButton("New game!");
-//		Label Restart = new Label("New Game!");
+		JButton ButtonA = new JButton("A");
+		JButton ButtonB = new JButton("B");
+		JButton ButtonC = new JButton("C");
+		JButton ButtonD = new JButton("D");
+		JButton ButtonE = new JButton("E");
+		JButton ButtonF = new JButton("F");
+		JButton ButtonG = new JButton("G");
+		JButton ButtonH = new JButton("H");
+		JButton ButtonI = new JButton("I");
+		JButton ButtonJ = new JButton("J");
+		JButton ButtonK = new JButton("K");
+		JButton ButtonL = new JButton("L");
+		JButton ButtonM = new JButton("M");
+		JButton ButtonN = new JButton("N");
+		JButton ButtonO = new JButton("O");
+		JButton ButtonP = new JButton("P");
+		JButton ButtonQ = new JButton("Q");
+		JButton ButtonR = new JButton("R");
+		JButton ButtonS = new JButton("S");
+		JButton ButtonT = new JButton("T");
+		JButton ButtonU = new JButton("U");
+		JButton ButtonV = new JButton("V");
+		JButton ButtonW = new JButton("W");
+		JButton ButtonX = new JButton("X");
+		JButton ButtonY = new JButton("Y");
+		JButton ButtonZ = new JButton("Z");
+		JButton Restart = new JButton("Go back to menu");
+		
+		if(visibility) {
+		Restart.setVisible(true);
+		} else Restart.setVisible(false);
 
-//
-//		if(visibility) {
-//		Restart.setVisible(true);
-//		} else Restart.setVisible(false);
-//
-//		JLabel guessSpace = new JLabel(secret);
-//		JLabel poruka = new JLabel(message);
-//		guessSpace.setFont((new Font("Serif", Font.CENTER_BASELINE, 29)));
-//		poruka.setFont((new Font("Serif", Font.CENTER_BASELINE, 18)));
-//		Restart.setFont((new Font("Serif", Font.CENTER_BASELINE, 29)));
-//		Restart.setSize(new Dimension(200, 200));
+		JLabel guessSpace = new JLabel(secret);
+		JLabel poruka = new JLabel(message);
+		guessSpace.setFont((new Font("Serif", Font.CENTER_BASELINE, 29)));
+		poruka.setFont((new Font("Serif", Font.CENTER_BASELINE, 18)));
+		Restart.setFont((new Font("Serif", Font.CENTER_BASELINE, 29)));
+		Restart.setSize(new Dimension(50, 20));
 	
-//		slika = new MyDrawPanel();
-//		slika.setStatus(status);
-
-		myDrawPanel2 = new MyDrawPanel2();
-		myDrawPanel3 = new MyDrawPanel3();
-		myDrawPanel5 = new MyDrawPanel5();
-		//myDrawPanel2.setStatus(status);
+		slika = new MyDrawPanel();
+		slika.setStatus(status);
 		
 		//dodaj gumbe
-//		letterPanel.setLayout(new GridLayout(2,2));
-//		letterPanel.add(ButtonA);
-//		letterPanel.add(ButtonB);
-//		letterPanel.add(ButtonC);
-//		letterPanel.add(ButtonD);
-//		letterPanel.add(ButtonE);
-//		letterPanel.add(ButtonF);
-//		letterPanel.add(ButtonG);
-//		letterPanel.add(ButtonH);
-//		letterPanel.add(ButtonI);
-//		letterPanel.add(ButtonJ);
-//		letterPanel.add(ButtonK);
-//		letterPanel.add(ButtonL);
-//		letterPanel.add(ButtonM);
-//		letterPanel.add(ButtonN);
-//		letterPanel.add(ButtonO);
-//		letterPanel.add(ButtonP);
-//		letterPanel.add(ButtonQ);
-//		letterPanel.add(ButtonR);
-//		letterPanel.add(ButtonS);
-//		letterPanel.add(ButtonT);
-//		letterPanel.add(ButtonU);
-//		letterPanel.add(ButtonV);
-//		letterPanel.add(ButtonW);
-//		letterPanel.add(ButtonX);
-//		letterPanel.add(ButtonY);
-//		letterPanel.add(ButtonZ);
+		letterPanel.setLayout(new GridLayout(2,2));
+		letterPanel.add(ButtonA);
+		letterPanel.add(ButtonB);
+		letterPanel.add(ButtonC);
+		letterPanel.add(ButtonD);
+		letterPanel.add(ButtonE);
+		letterPanel.add(ButtonF);
+		letterPanel.add(ButtonG);
+		letterPanel.add(ButtonH);
+		letterPanel.add(ButtonI);
+		letterPanel.add(ButtonJ);
+		letterPanel.add(ButtonK);
+		letterPanel.add(ButtonL);
+		letterPanel.add(ButtonM);
+		letterPanel.add(ButtonN);
+		letterPanel.add(ButtonO);
+		letterPanel.add(ButtonP);
+		letterPanel.add(ButtonQ);
+		letterPanel.add(ButtonR);
+		letterPanel.add(ButtonS);
+		letterPanel.add(ButtonT);
+		letterPanel.add(ButtonU);
+		letterPanel.add(ButtonV);
+		letterPanel.add(ButtonW);
+		letterPanel.add(ButtonX);
+		letterPanel.add(ButtonY);
+		letterPanel.add(ButtonZ);
+		
+		//dodaj ActionListener
+		ButtonA.addActionListener(new LetterListener(ButtonA, status, word));
+		ButtonB.addActionListener(new LetterListener(ButtonB, status, word));
+		ButtonC.addActionListener(new LetterListener(ButtonC, status, word));
+		ButtonD.addActionListener(new LetterListener(ButtonD, status, word));
+		ButtonE.addActionListener(new LetterListener(ButtonE, status, word));
+		ButtonF.addActionListener(new LetterListener(ButtonF, status, word));
+		ButtonG.addActionListener(new LetterListener(ButtonG, status, word));
+		ButtonH.addActionListener(new LetterListener(ButtonH, status, word));
+		ButtonI.addActionListener(new LetterListener(ButtonI, status, word));
+		ButtonJ.addActionListener(new LetterListener(ButtonJ, status, word));
+		ButtonK.addActionListener(new LetterListener(ButtonK, status, word));
+		ButtonL.addActionListener(new LetterListener(ButtonL, status, word));
+		ButtonM.addActionListener(new LetterListener(ButtonM, status, word));
+		ButtonN.addActionListener(new LetterListener(ButtonN, status, word));
+		ButtonO.addActionListener(new LetterListener(ButtonO, status, word));
+		ButtonP.addActionListener(new LetterListener(ButtonP, status, word));
+		ButtonQ.addActionListener(new LetterListener(ButtonQ, status, word));
+		ButtonR.addActionListener(new LetterListener(ButtonR, status, word));
+		ButtonS.addActionListener(new LetterListener(ButtonS, status, word));
+		ButtonT.addActionListener(new LetterListener(ButtonT, status, word));
+		ButtonU.addActionListener(new LetterListener(ButtonU, status, word));
+		ButtonV.addActionListener(new LetterListener(ButtonV, status, word));
+		ButtonW.addActionListener(new LetterListener(ButtonW, status, word));
+		ButtonX.addActionListener(new LetterListener(ButtonX, status, word));
+		ButtonY.addActionListener(new LetterListener(ButtonY, status, word));
+		ButtonZ.addActionListener(new LetterListener(ButtonZ, status, word));
+		Restart.addActionListener(new RestartListener());
+		Restart.setBackground(Color.BLUE);
 
-//
-//
-//
-//
-//		//dodaj ActionListener
-//		ButtonA.addActionListener(new LetterListener(ButtonA, status, word));
-//		ButtonB.addActionListener(new LetterListener(ButtonB, status, word));
-//		ButtonC.addActionListener(new LetterListener(ButtonC, status, word));
-//		ButtonD.addActionListener(new LetterListener(ButtonD, status, word));
-//		ButtonE.addActionListener(new LetterListener(ButtonE, status, word));
-//		ButtonF.addActionListener(new LetterListener(ButtonF, status, word));
-//		ButtonG.addActionListener(new LetterListener(ButtonG, status, word));
-//		ButtonH.addActionListener(new LetterListener(ButtonH, status, word));
-//		ButtonI.addActionListener(new LetterListener(ButtonI, status, word));
-//		ButtonJ.addActionListener(new LetterListener(ButtonJ, status, word));
-//		ButtonK.addActionListener(new LetterListener(ButtonK, status, word));
-//		ButtonL.addActionListener(new LetterListener(ButtonL, status, word));
-//		ButtonM.addActionListener(new LetterListener(ButtonM, status, word));
-//		ButtonN.addActionListener(new LetterListener(ButtonN, status, word));
-//		ButtonO.addActionListener(new LetterListener(ButtonO, status, word));
-//		ButtonP.addActionListener(new LetterListener(ButtonP, status, word));
-//		ButtonQ.addActionListener(new LetterListener(ButtonQ, status, word));
-//		ButtonR.addActionListener(new LetterListener(ButtonR, status, word));
-//		ButtonS.addActionListener(new LetterListener(ButtonS, status, word));
-//		ButtonT.addActionListener(new LetterListener(ButtonT, status, word));
-//		ButtonU.addActionListener(new LetterListener(ButtonU, status, word));
-//		ButtonV.addActionListener(new LetterListener(ButtonV, status, word));
-//		ButtonW.addActionListener(new LetterListener(ButtonW, status, word));
-//		ButtonX.addActionListener(new LetterListener(ButtonX, status, word));
-//		ButtonY.addActionListener(new LetterListener(ButtonY, status, word));
-//		ButtonZ.addActionListener(new LetterListener(ButtonZ, status, word));
-//		//Restart.addActionListener(new RestartListener());
-//		Restart.getText(); /////
-
-		JButton Buttonstart = new JButton("Start Game!");
-		frame.add(Buttonstart);
-		Buttonstart.setBounds(290,500,300,100);
-		Buttonstart.setFont((new Font("Serif", Font.CENTER_BASELINE, 30)));
-		Buttonstart.setBackground(Color.RED);
-		Buttonstart.addActionListener(new ButtonstartActionListener());
-		//Buttonstart.addActionListener();
-		//Buttonstart.getFont("Serif", Font.CENTER_BASELINE, 17);
-		//letterPanel.add(Buttonstart);
-		//Buttonstart.addActionListener(new LetterListener(Buttonstart,status,word));
-
-
-		//frame.add(slika);
-		frame.add(myDrawPanel2);
-		frame.add(myDrawPanel3);
-
-//		wordPanel.add(guessSpace);
-//		wordPanel.add(poruka);
-//		wordPanel.add(Restart);
-//		wordPanel.setLayout(new GridLayout(3,1));
-
-
+		frame.add(slika);
+		wordPanel.add(guessSpace);
+		wordPanel.add(poruka);
+		wordPanel.add(Restart);
+		wordPanel.setLayout(new GridLayout(3,1));
+				
 		frame.getContentPane().add(BorderLayout.SOUTH, letterPanel);
 		frame.getContentPane().add(BorderLayout.EAST, wordPanel);
 		frame.setVisible(true);
 		frame.setSize(900,700);
-		frame.setResizable(false); //
-		frame.setBackground(Color.BLUE);
+		frame.setBackground(Color.white);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 	}
-
-//правила игры
-		public String rul = "Один из игроков загадывает слово — пишет на бумаге первую и последнюю" ;
-		public String rul1 =	"букву слова и отмечает места для остальных букв,например чертами" ;
-		public String rul2 =	"(существует также вариант, когда изначально все буквы слова  " ;
-		public String rul3 =	"неизвестны). Также рисуется виселица с петлёй.Согласно традиции русских " ;
-		public String rul4 =	"лингвистических игр, слово должно быть именем существительным, " ;
-		public String rul5 =	"нарицательным в именительном падеже единственного числа, либо " ;
-		public String rul6 =	"множественного числа при отсутствии у слова формы единственного числа.\n" ;
-
-//		"Второй игрок предлагает букву, которая может входить в это слово. Если такая" +
-//		" буква есть в слове, то первый игрок пишет её над соответствующими этой букве" +
-//		" чертами — столько раз, сколько она встречается в слове. Если такой буквы нет," +
-//		" то к виселице добавляется круг в петле, изображающий голову. Второй игрок " +
-//		"продолжает отгадывать буквы до тех пор, пока не отгадает всё слово. За каждый" +
-//		" неправильный ответ первый игрок добавляет одну часть туловища к виселице" +
-//		" (обычно их 6: голова, туловище, 2 руки и 2 ноги, существует также вариант" +
-//		" с 8 частями — добавляются ступни, а также самый длинный вариант, когда сначала" +
-//		" за неотгаданную букву рисуются части самой виселицы).\n" +
-//		"\n" +
-//		"Если туловище в виселице нарисовано полностью, то отгадывающий игрок проигрывает," +
-//		" считается повешенным. Если игроку удаётся угадать слово, он выигрывает и может загадывать слово. ";
-
-	public class ButtonstartActionListener implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent event){
-			frame.add(myDrawPanel5);
-			String wordm = WordM.arr();
-
-		}
-	}
-
-
-
+	
 	public class LetterListener implements ActionListener {
 		JButton Slovo;
 		int status;
@@ -220,26 +149,27 @@ public class Screen extends WordM{
 			this.Slovo = slovo;
 			this.status=status;
 			this.word=word;
+			
 		}
 		public void actionPerformed(ActionEvent event) {
 			if(status<11) {
-				if(Word.checkLetter(Slovo.getText())==true) {
-					secret=Word.addLetter(Slovo.getText());
-					frame.dispose();
-					if (secret.contains("_")) {
-					s1.go(word, secret, status, "There is letter "  + Slovo.getText() + " in the wanted expression",false);
-					} else {
-						s1.go(word, secret, status, "The letter "  + Slovo.getText() + " is in the wanted expression. The word has been found!",true);
-					}
-				}else{
-					frame.dispose();
-					s1.go(word, secret, status+1, "The letter "  + Slovo.getText() + " is not in the wanted expression.",false);
-				}
-			} else  {
+			if(Word.checkLetter(Slovo.getText())==true) {
+				secret=Word.addLetter(Slovo.getText());
 				frame.dispose();
-				Word.restartPosition();
-				s1.go(word, secret, status, "You lost. Answer: "+ Word.getWord(),true);
+				if (secret.contains("_")) {
+				s1.go(word, secret, status, "There is letter "  + Slovo.getText() + " in the wanted expression",false);
+				} else {
+					s1.go(word, secret, status, "The word has been found!",true);
+				}
+			}else{		
+				frame.dispose();
+				s1.go(word, secret, status+1, "The letter "  + Slovo.getText() + " is not in the wanted expression.",false);	
 			}
+		} else  {
+			frame.dispose();
+			Word.restartPosition();
+			s1.go(word, secret, status, "You lost. Answer is "+ Word.getWord()+"!",true);
+		}
 		}
 	}
 	
@@ -255,72 +185,18 @@ public class Screen extends WordM{
 			}
 		}
 	}
-    //красить панель после нажатия на кнопку "start game"
-	class MyDrawPanel5 extends JPanel {
-		@Override
+	
+	
+	class MyDrawPanel extends JPanel {
+		private static final long serialVersionUID = 1L;
+		private String filepath;
+		public void setStatus(int status) {
+			filepath="./gallows/"+status+".jpg";
+		}
 		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			setBackground(Color.WHITE);
+			Image image = new ImageIcon(filepath).getImage();
+			g.drawImage(image, 0,0,342, 306, this);
 		}
 	}
 
-//
-//
-//	class MyDrawPanel extends JPanel {
-//		private static final long serialVersionUID = 1L;
-//		private String filepath;
-//		public void setStatus(int status) {
-//			filepath="./gallows/"+status+".jpg";
-//		}
-//		public void paintComponent(Graphics g) {
-//			Image image = new ImageIcon(filepath).getImage();
-//			g.drawImage(image, 0,300,342, 306, this);
-//		}
-//	}
-
-
-
-    // метод ниже должен нарисовать фон в клетку
-    private int y;
-    private int x;
-	class MyDrawPanel2 extends JPanel{
-				@Override
-				public void paintComponent(Graphics g) {
-					super.paintComponent(g);
-					y = 0;
-			while (y < 700){
-				x = 0;
-				while (x < 900){
-					g.drawRect(x, y, x+33, y+27);
-					g.setColor(Color.BLUE);
-				x = x + 33;
-				}
-			y = y + 27;
-			}
-
-		}
-
-	}
-	class MyDrawPanel3 extends JPanel {
-		@Override
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			g.setFont((new Font("Serif", Font.CENTER_BASELINE, 17)));
-			g.setColor(Color.BLACK);
-			g.drawString(rul, 70, 50);
-			g.drawString(rul1, 70, 70);
-			g.drawString(rul2, 70, 90);
-			g.drawString(rul3, 70, 110);
-			g.drawString(rul4, 70, 130);
-			g.drawString(rul5, 70, 150);
-			g.drawString(rul6, 70, 170);
-
-
-
-		}
-	}
 }
-/*1.Создать объект клвсса WordM
- * 2.Добавить в frame MyDrawPanel4 чтобы реализовать метод arr() класса WordM
- * 3.Добавить музыку
- * 4.*/
