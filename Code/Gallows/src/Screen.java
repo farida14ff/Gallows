@@ -16,13 +16,13 @@ public class Screen {
 	String secret=null;
 	MyDrawPanel slika;
 	public void go(String word, String secret, int status, String message, boolean visibility) {
-		
+
 		//prozor
 		frame = new JFrame("Gallows pole!");
 		JPanel letterPanel = new JPanel();
 		JPanel wordPanel = new JPanel();
 		this.secret=secret;
-		
+
 		//gumbi
 		JButton ButtonA = new JButton("A");
 		JButton ButtonB = new JButton("B");
@@ -50,17 +50,18 @@ public class Screen {
 		JButton ButtonX = new JButton("X");
 		JButton ButtonY = new JButton("Y");
 		JButton ButtonZ = new JButton("Z");
-		JButton Restart = new JButton("New game!");
+		JButton Restart = new JButton("Go back to menu");
+		
 		if(visibility) {
 		Restart.setVisible(true);
 		} else Restart.setVisible(false);
-		
+
 		JLabel guessSpace = new JLabel(secret);
 		JLabel poruka = new JLabel(message);
 		guessSpace.setFont((new Font("Serif", Font.CENTER_BASELINE, 29)));
 		poruka.setFont((new Font("Serif", Font.CENTER_BASELINE, 18)));
 		Restart.setFont((new Font("Serif", Font.CENTER_BASELINE, 29)));
-		Restart.setSize(new Dimension(100, 100));
+		Restart.setSize(new Dimension(50, 20));
 	
 		slika = new MyDrawPanel();
 		slika.setStatus(status);
@@ -122,6 +123,7 @@ public class Screen {
 		ButtonY.addActionListener(new LetterListener(ButtonY, status, word));
 		ButtonZ.addActionListener(new LetterListener(ButtonZ, status, word));
 		Restart.addActionListener(new RestartListener());
+		Restart.setBackground(Color.BLUE);
 
 		frame.add(slika);
 		wordPanel.add(guessSpace);
@@ -157,7 +159,7 @@ public class Screen {
 				if (secret.contains("_")) {
 				s1.go(word, secret, status, "There is letter "  + Slovo.getText() + " in the wanted expression",false);
 				} else {
-					s1.go(word, secret, status, "The letter "  + Slovo.getText() + " is in the wanted expression. The word has been found!",true);
+					s1.go(word, secret, status, "The word has been found!",true);
 				}
 			}else{		
 				frame.dispose();
@@ -166,7 +168,7 @@ public class Screen {
 		} else  {
 			frame.dispose();
 			Word.restartPosition();
-			s1.go(word, secret, status, "The game is over! You lost. The wanted expression is "+ Word.getWord()+"!",true);
+			s1.go(word, secret, status, "You lost. Answer is "+ Word.getWord()+"!",true);
 		}
 		}
 	}
@@ -195,5 +197,7 @@ public class Screen {
 			Image image = new ImageIcon(filepath).getImage();
 			g.drawImage(image, 0,0,342, 306, this);
 		}
-		}
+	}
+
 }
+
