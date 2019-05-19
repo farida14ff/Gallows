@@ -8,22 +8,31 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
 import javax.swing.*;
 
 public class Screen {
 	JFrame frame=null;
 	String secret=null;
 	MyDrawPanel slika;
+
+	public static Audio btns;
+	public static Audio win;
+	public static Audio loos;
+
+
 	public void go(String word, String secret, int status, String message, boolean visibility) {
 
-		//prozor
+
 		frame = new JFrame("Gallows pole!");
 		JPanel letterPanel = new JPanel();
 		JPanel wordPanel = new JPanel();
 		this.secret=secret;
 
-		//gumbi
+		btns = new Audio("/home/farida/DPrograms/Git/JavaProj/GlJ8.9/probnick/gallows/btn.wav",1.0);
+		win = new Audio("/home/farida/Downloads/wavSounds/win.wav",1.0);
+		loos = new Audio("/home/farida/Downloads/wavSounds/lose.wav",1.0);
+
+		//letters
 		JButton ButtonA = new JButton("A");
 		JButton ButtonB = new JButton("B");
 		JButton ButtonC = new JButton("C");
@@ -50,23 +59,43 @@ public class Screen {
 		JButton ButtonX = new JButton("X");
 		JButton ButtonY = new JButton("Y");
 		JButton ButtonZ = new JButton("Z");
+		JButton anotherWord = new JButton("Another word");
+		JButton NewGame = new JButton("New Game");
 		JButton Restart = new JButton("Go back to menu");
-		
+
+
+
 		if(visibility) {
-		Restart.setVisible(true);
-		} else Restart.setVisible(false);
+			anotherWord.setVisible(false);
+			NewGame.setVisible(true);
+			Restart.setVisible(true);
+
+		} else{
+			anotherWord.setVisible(true);
+			NewGame.setVisible(false);
+			Restart.setVisible(false);
+		}
 
 		JLabel guessSpace = new JLabel(secret);
-		JLabel poruka = new JLabel(message);
 		guessSpace.setFont((new Font("Serif", Font.CENTER_BASELINE, 29)));
+
+		JLabel poruka = new JLabel(message);
 		poruka.setFont((new Font("Serif", Font.CENTER_BASELINE, 18)));
+
+		anotherWord.setFont((new Font("Serif", Font.CENTER_BASELINE, 29)));
+		anotherWord.setSize(new Dimension(50, 20));
+
+
+		NewGame.setFont((new Font("Serif", Font.CENTER_BASELINE, 29)));
+		NewGame.setSize(new Dimension(50, 20));
+
 		Restart.setFont((new Font("Serif", Font.CENTER_BASELINE, 29)));
 		Restart.setSize(new Dimension(50, 20));
-	
+
 		slika = new MyDrawPanel();
 		slika.setStatus(status);
-		
-		//dodaj gumbe
+
+		//adding letters
 		letterPanel.setLayout(new GridLayout(2,2));
 		letterPanel.add(ButtonA);
 		letterPanel.add(ButtonB);
@@ -94,8 +123,8 @@ public class Screen {
 		letterPanel.add(ButtonX);
 		letterPanel.add(ButtonY);
 		letterPanel.add(ButtonZ);
-		
-		//dodaj ActionListener
+
+		//letters ActionListener
 		ButtonA.addActionListener(new LetterListener(ButtonA, status, word));
 		ButtonB.addActionListener(new LetterListener(ButtonB, status, word));
 		ButtonC.addActionListener(new LetterListener(ButtonC, status, word));
@@ -122,15 +151,25 @@ public class Screen {
 		ButtonX.addActionListener(new LetterListener(ButtonX, status, word));
 		ButtonY.addActionListener(new LetterListener(ButtonY, status, word));
 		ButtonZ.addActionListener(new LetterListener(ButtonZ, status, word));
-		Restart.addActionListener(new RestartListener());
-		Restart.setBackground(Color.BLUE);
 
-		frame.add(slika);
+		anotherWord.addActionListener(new NewGameListener());
+		anotherWord.setBackground(Color.pink);
+
+		NewGame.addActionListener(new NewGameListener());
+		NewGame.setBackground(Color.pink);
+
+		Restart.addActionListener(new RestartListener());
+		Restart.setBackground(Color.PINK);
+
+
 		wordPanel.add(guessSpace);
 		wordPanel.add(poruka);
+		wordPanel.add(anotherWord);
+		wordPanel.add(NewGame);
 		wordPanel.add(Restart);
-		wordPanel.setLayout(new GridLayout(3,1));
-				
+		wordPanel.setLayout(new GridLayout(7,1));
+
+		frame.add(slika);
 		frame.getContentPane().add(BorderLayout.SOUTH, letterPanel);
 		frame.getContentPane().add(BorderLayout.EAST, wordPanel);
 		frame.setVisible(true);
@@ -139,7 +178,7 @@ public class Screen {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
+
 	public class LetterListener implements ActionListener {
 		JButton Slovo;
 		int status;
@@ -149,34 +188,56 @@ public class Screen {
 			this.Slovo = slovo;
 			this.status=status;
 			this.word=word;
-			
+
 		}
 		public void actionPerformed(ActionEvent event) {
+			btns.sound();
 			if(status<11) {
-			if(Word.checkLetter(Slovo.getText())==true) {
-				secret=Word.addLetter(Slovo.getText());
-				frame.dispose();
-				if (secret.contains("_")) {
-				s1.go(word, secret, status, "There is letter "  + Slovo.getText() + " in the wanted expression",false);
-				} else {
-					s1.go(word, secret, status, "The word has been found!",true);
+				if(Word.checkLetter(Slovo.getText())==true) {
+					secret=Word.addLetter(Slovo.getText());
+					frame.dispose();
+					if (secret.contains("_")) {
+						s1.go(word, secret, status, "There is letter "  + Slovo.getText() + " in the wanted expression",false);
+					} else {
+						win.sound();
+						s1.go(word, secret, status, "The word has been found!",true);
+					}
+				}else{
+					frame.dispose();
+					s1.go(word, secret, status+1, "The letter "  + Slovo.getText() + " is not in the wanted expression.",false);
 				}
-			}else{		
+			} else  {
 				frame.dispose();
-				s1.go(word, secret, status+1, "The letter "  + Slovo.getText() + " is not in the wanted expression.",false);	
+				Word.restartPosition();
+				loos.sound();
+			    s1.go(word, secret, status, "You lost. Answer is "+ Word.getWord()+"!",true);
 			}
-		} else  {
-			frame.dispose();
-			Word.restartPosition();
-			s1.go(word, secret, status, "You lost. Answer is "+ Word.getWord()+"!",true);
-		}
 		}
 	}
-	
+
+	public class NewGameListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				btns.sound();
+				String word = Wordpicker.getWord();
+				Word.setWord(word);
+				String secret = Word.hideSecret();
+				Screen s = new Screen();
+				s.go(word, secret, 0, "",false);
+				frame.setVisible(false);
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
 	public class RestartListener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 			Start s1= new Start();
 			try {
+				btns.sound();
 				frame.dispose();
 				Word.restartPosition();
 				s1.start();
@@ -185,8 +246,8 @@ public class Screen {
 			}
 		}
 	}
-	
-	
+
+
 	class MyDrawPanel extends JPanel {
 		private static final long serialVersionUID = 1L;
 		private String filepath;
