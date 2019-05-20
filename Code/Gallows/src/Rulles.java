@@ -7,11 +7,22 @@ import java.io.IOException;
 public class Rulles {
 
     public JFrame rullesFrame = null;
+    public JPanel  rullesPanel = null;
     public static Audio btns;
 
     public void ShowRulles(){
         rullesFrame = new JFrame("RULES");
-        JPanel  rullesPanel = new JPanel();
+        rullesPanel = new JPanel();
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu1 = new JMenu("Options");
+        JMenu podMenu1 = new JMenu("Language");
+        JMenuItem subPodMenu11 = new JMenu("English");
+        JMenuItem subPodMenu12 = new JMenu("Русский");
+
+        menu1.add(podMenu1);
+        podMenu1.add(subPodMenu11);
+        podMenu1.add(subPodMenu12);
+        menuBar.add(menu1);
 
         rullesFrame.getContentPane().add(BorderLayout.CENTER, rullesPanel);
         rullesFrame.setVisible(true);
@@ -19,6 +30,7 @@ public class Rulles {
         rullesFrame.setBackground(Color.PINK);
         rullesFrame.setResizable(false);
         rullesFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        rullesFrame.setJMenuBar(menuBar);
 
         btns = new Audio("/home/farida/DPrograms/Git/JavaProj/GlJ8.9/probnick/gallows/btn.wav",1.0);
 
@@ -30,17 +42,15 @@ public class Rulles {
 
         String rullesOfGame = "<html> <u>RULES <br>" +
                 "<br>"+
-                "</u>One player thinks of a word or phrase; the others try to guess what <br>" +
-                "it is one letter at a time. The player draws a number of dashes equivalent<br>" +
-                "to the number of letters in the word. If a guessing player suggests a letter<br>" +
-                "that occurs in the word, the other player fills in the blanks with that<br>" +
+                "</u>The computer gives to the player word or phrase; the player try  <br>" +
+                "to guess what it is one letter at a time.If a player suggests a letter<br>" +
+                "that occurs in the word, the computer fills in the blanks with that<br>" +
                 "letter in the right places. If the word does not contain the suggested <br>" +
-                "letter, the other player draws one element of a hangman’s gallows. As the<br>" +
+                "letter, the computer draws one element of a hangman’s gallows. As the<br>" +
                 "game progresses, a segment of the gallows and of a victim is added for <br>" +
                 "every suggested letter not in the word. The number of incorrect guesses <br>" +
                 "before the game ends is up to the players, but completing a character in <br>" +
-                "a noose provides a minimum of six wrong answers until the game ends. The <br>" +
-                "first player to guess the correct answer thinks of the word for the next game.<br>" +
+                "a noose provides a minimum of six wrong answers until the game ends.<br>"+
                 "<br>" +
                 "Objective<br>" +
                 "Guess the word/phrase before your man gets hung!<br>" +
@@ -48,7 +58,7 @@ public class Rulles {
                 "Letter frequencies<br>" +
                 "A good acronym to commit to memory is: ETAOIN SHRDLU. It’s hard to <br>" +
                 "pronounce, yes, but its order denotes the most commonly used letters<br>" +
-                "(in order) in the. English language.</html>";
+                "(in order) in the English language.</html>";
 
         JLabel rulLabel = new JLabel(rullesOfGame,JLabel.CENTER);
         rulLabel.setFont((new Font("Serif", Font.CENTER_BASELINE, 20)));
