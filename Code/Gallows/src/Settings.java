@@ -6,15 +6,21 @@ import java.io.IOException;
 
 public class Settings {
     public JFrame setingsFrame= null;
+    public JPanel setingsPanel = null;
+    public JPanel setingsPanelGoBack = null;
     public static Audio btns;
-    JRadioButton soundOff = new JRadioButton("OFF",true);
-    JRadioButton soundOn = new JRadioButton("ON",false);
+    JRadioButton soundOffB = new JRadioButton("OFF",true);
+    JRadioButton soundOnB = new JRadioButton("ON",false);
 
     public void ShowSetings(){
         setingsFrame = new JFrame("SETTINGS");
-        JPanel  setingsPanel = new JPanel();
+        setingsPanel = new JPanel();
+        setingsPanelGoBack = new JPanel();
+        ButtonGroup group = new ButtonGroup();
+        btns = new Audio("/home/farida/DPrograms/Git/JavaProj/GlJ8.9/probnick/gallows/btn.wav",1.0);
 
         setingsFrame.getContentPane().add(BorderLayout.CENTER, setingsPanel);
+        setingsFrame.getContentPane().add(BorderLayout.SOUTH, setingsPanelGoBack);
         setingsFrame.setVisible(true);
         setingsFrame.setSize(900,700);
         setingsFrame.setBackground(Color.PINK);
@@ -22,27 +28,22 @@ public class Settings {
         setingsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setingsFrame.setBackground(Color.PINK);
 
-        btns = new Audio("/home/farida/DPrograms/Git/JavaProj/GlJ8.9/probnick/gallows/btn.wav",1.0);
-
         String setingsOfGame = "<html> <u>SETTINGS</u><br>" +
                 "<br>" +
-                "Sound <br></html>";
+                "Sound: <br>" +
+                " <br></html>";
 
         JLabel setingLabel = new JLabel(setingsOfGame,JLabel.CENTER);
         setingLabel.setFont((new Font("Serif", Font.CENTER_BASELINE, 20)));
-        setingLabel.setAlignmentX(0);
-        setingLabel.setAlignmentY(0);
 
+        soundOffB.addActionListener(new Settings.SoundOffListener());
+        soundOnB.addActionListener(new Settings.SoundOnListener());
+        soundOffB.setBackground(Color.PINK);
+        soundOnB.setBackground(Color.PINK);
 
+        group.add(soundOffB);
+        group.add(soundOnB);
 
-        soundOff.addActionListener(new Settings.SoundOffListener());
-
-
-        soundOn.addActionListener(new Settings.SoundOnListener());
-
-        ButtonGroup group = new ButtonGroup();
-        group.add(soundOn);
-        group.add(soundOff);
 
         JButton Restart = new JButton("Go back");
         Restart.addActionListener(new Settings.RestartListener());
@@ -50,22 +51,22 @@ public class Settings {
         Restart.setFont((new Font("Serif", Font.CENTER_BASELINE, 27)));
         Restart.setSize(new Dimension(50, 20));
 
-//        JButton save = new JButton("Save");
-//        save.addActionListener(new SaveListener());
-//        save.setBackground(Color.ORANGE);
-//        save.setFont((new Font("Serif", Font.CENTER_BASELINE, 27)));
-//        save.setSize(new Dimension(50, 20));
-
-
+        JButton color = new JButton("Change color");
+        color.setBackground(new Color(0, 0, 0));
+        color.setForeground(new Color(241, 255, 0));
+        color.setFont((new Font("Serif", Font.CENTER_BASELINE, 27)));
+        color.setSize(new Dimension(50, 20));
+        color.addActionListener(new Settings.ColorListener());
 
         setingsPanel.add(setingLabel);
-        setingsPanel.add(soundOn);
-        setingsPanel.add(soundOff);
-        setingsPanel.add(Restart);
+        setingsPanel.add(soundOnB);
+        setingsPanel.add(soundOffB);
         setingsPanel.setBackground(Color.PINK);
+        setingsPanel.setLayout(new GridLayout(7,1));
 
-
-
+        setingsPanelGoBack.add(color);
+        setingsPanelGoBack.add(Restart);
+        setingsPanelGoBack.setBackground(Color.PINK);
 
     }
     public class RestartListener implements ActionListener {
@@ -103,6 +104,32 @@ public class Settings {
 
         }
     }
+
+    public class ColorListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            btns.sound();
+            try {
+                final JColorChooser chooser = new JColorChooser();
+                class OkListener implements ActionListener {
+
+                    public void actionPerformed(ActionEvent e) {
+                        Color c = chooser.getColor();
+                        setingsPanel.setBackground(c);
+                        soundOffB.setBackground(c);
+                        soundOnB.setBackground(c);
+                        setingsPanelGoBack.setBackground(c);
+                        btns.sound();
+                    }
+                }
+                JDialog co = JColorChooser.createDialog(null, "Pick A Color", false, chooser, new OkListener(), null);
+                chooser.setColor(new Color(154, 51, 52));
+                co.setVisible(true);
+            } catch (Exception ex) {
+                System.out.println("Nothing");
+            }
+        }
+    }
+
 
 
 }
