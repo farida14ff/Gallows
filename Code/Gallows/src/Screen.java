@@ -152,6 +152,34 @@ public class Screen {
 		ButtonY.addActionListener(new LetterListener(ButtonY, status, word));
 		ButtonZ.addActionListener(new LetterListener(ButtonZ, status, word));
 
+		//color of buttons
+		ButtonA.setBackground(Color.PINK);
+		ButtonB.setBackground(Color.PINK);
+		ButtonC.setBackground(Color.PINK);
+		ButtonD.setBackground(Color.PINK);
+		ButtonE.setBackground(Color.PINK);
+		ButtonF.setBackground(Color.PINK);
+		ButtonG.setBackground(Color.PINK);
+		ButtonH.setBackground(Color.PINK);
+		ButtonI.setBackground(Color.PINK);
+		ButtonJ.setBackground(Color.PINK);
+		ButtonK.setBackground(Color.PINK);
+		ButtonL.setBackground(Color.PINK);
+		ButtonM.setBackground(Color.PINK);
+		ButtonN.setBackground(Color.PINK);
+		ButtonO.setBackground(Color.PINK);
+		ButtonP.setBackground(Color.PINK);
+		ButtonQ.setBackground(Color.PINK);
+		ButtonR.setBackground(Color.PINK);
+		ButtonS.setBackground(Color.PINK);
+		ButtonT.setBackground(Color.PINK);
+		ButtonU.setBackground(Color.PINK);
+		ButtonV.setBackground(Color.PINK);
+		ButtonW.setBackground(Color.PINK);
+		ButtonX.setBackground(Color.PINK);
+		ButtonY.setBackground(Color.PINK);
+		ButtonZ.setBackground(Color.PINK);
+
 		anotherWord.addActionListener(new NewGameListener());
 		anotherWord.setBackground(Color.pink);
 
