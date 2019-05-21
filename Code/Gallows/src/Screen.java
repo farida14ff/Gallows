@@ -151,6 +151,10 @@ public class Screen {
 		ButtonX.addActionListener(new LetterListener(ButtonX, status, word));
 		ButtonY.addActionListener(new LetterListener(ButtonY, status, word));
 		ButtonZ.addActionListener(new LetterListener(ButtonZ, status, word));
+		anotherWord.addActionListener(new NewGameListener());
+		NewGame.addActionListener(new NewGameListener());
+		Restart.addActionListener(new RestartListener());
+
 
 		//color of buttons
 		ButtonA.setBackground(Color.PINK);
@@ -179,14 +183,8 @@ public class Screen {
 		ButtonX.setBackground(Color.PINK);
 		ButtonY.setBackground(Color.PINK);
 		ButtonZ.setBackground(Color.PINK);
-
-		anotherWord.addActionListener(new NewGameListener());
-		anotherWord.setBackground(Color.pink);
-
-		NewGame.addActionListener(new NewGameListener());
-		NewGame.setBackground(Color.pink);
-
-		Restart.addActionListener(new RestartListener());
+		anotherWord.setBackground(Color.PINK);
+		NewGame.setBackground(Color.PINK);
 		Restart.setBackground(Color.PINK);
 
 
