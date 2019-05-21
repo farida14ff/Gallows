@@ -8,36 +8,29 @@ public class Rulles {
 
     public JFrame rullesFrame = null;
     public JPanel  rullesPanel = null;
+
+
     public static Audio btns;
 
     public void ShowRulles(){
         rullesFrame = new JFrame("RULES");
         rullesPanel = new JPanel();
         JMenuBar menuBar = new JMenuBar();
-        JMenu menu1 = new JMenu("Options");
+        JMenu options = new JMenu("Options");
         JMenu podMenu1 = new JMenu("Language");
-        JMenuItem subPodMenu11 = new JMenu("English");
-        JMenuItem subPodMenu12 = new JMenu("Русский");
+        JRadioButtonMenuItem r1 = new JRadioButtonMenuItem("English");
+        JRadioButtonMenuItem r2 = new JRadioButtonMenuItem("Русский");
+        r1.setSelected(true);
+        r2.addActionListener(new Rulles.R2Listener());
 
-        menu1.add(podMenu1);
-        podMenu1.add(subPodMenu11);
-        podMenu1.add(subPodMenu12);
-        menuBar.add(menu1);
 
-        rullesFrame.getContentPane().add(BorderLayout.CENTER, rullesPanel);
-        rullesFrame.setVisible(true);
-        rullesFrame.setSize(900,700);
-        rullesFrame.setBackground(Color.PINK);
-        rullesFrame.setResizable(false);
-        rullesFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        rullesFrame.setJMenuBar(menuBar);
+        options.add(podMenu1);
+        podMenu1.add(r1);
+        podMenu1.add(r2);
+        menuBar.add(options);
+
 
         btns = new Audio("/home/farida/DPrograms/Git/JavaProj/GlJ8.9/probnick/gallows/btn.wav",1.0);
-
-        JButton Restart = new JButton("Go back");
-        Restart.addActionListener(new Rulles.RestartListener());
-        Restart.setBackground(Color.orange);
-        Restart.setFont((new Font("AvantGarde", Font.CENTER_BASELINE, 27)));
 
 
         String rullesOfGame = "<html> <u>RULES <br>" +
@@ -61,13 +54,28 @@ public class Rulles {
                 "(in order) in the English language.</html>";
 
         JLabel rulLabel = new JLabel(rullesOfGame,JLabel.CENTER);
+        JButton Restart = new JButton("Go back");
+
         rulLabel.setFont((new Font("Serif", Font.CENTER_BASELINE, 20)));
         rulLabel.setAlignmentX(0);
         rulLabel.setAlignmentY(0);
 
+        Restart.addActionListener(new Rulles.RestartListener());
+        Restart.setBackground(Color.orange);
+        Restart.setFont((new Font("AvantGarde", Font.CENTER_BASELINE, 27)));
+
+
         rullesPanel.add(rulLabel);
         rullesPanel.add(Restart);
         rullesPanel.setBackground(Color.PINK);
+
+        rullesFrame.getContentPane().add(BorderLayout.CENTER, rullesPanel);
+        rullesFrame.setVisible(true);
+        rullesFrame.setSize(900,700);
+        rullesFrame.setBackground(Color.PINK);
+        rullesFrame.setResizable(false);
+        rullesFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        rullesFrame.setJMenuBar(menuBar);
 
     }
     public class RestartListener implements ActionListener {
@@ -81,6 +89,18 @@ public class Rulles {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public class R2Listener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            btns.sound();
+            RullesRusLang rullesRusLang = new RullesRusLang();
+            rullesRusLang.ShowRullesRusLang();
+            rullesFrame.setVisible(false);
+
         }
     }
 
