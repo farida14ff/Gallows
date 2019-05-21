@@ -7,8 +7,8 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 
 public class Menu {
-    JFrame menuFrame = null;
-    public static JPanel menuPanel = null;
+    public JFrame menuFrame = null;
+    public JPanel menuPanel = null;
 
     public static Audio btns;
     public static Audio back;
@@ -89,8 +89,6 @@ public class Menu {
         @Override
         public void mouseEntered(MouseEvent e) {
             StartGame.setText("Начать Игу!");
-//            StartGame.setBackground(new Color(81, 17, 154));
-//            StartGame.setForeground(new Color(55, 152, 251));
             StartGame.setBackground(new Color(0, 0, 0));
             StartGame.setForeground(new Color(241, 255, 0));
         }
@@ -121,6 +119,7 @@ public class Menu {
 
     }
 
+
     public class RullesListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             btns.sound();
@@ -150,8 +149,6 @@ public class Menu {
         @Override
         public void mouseEntered(MouseEvent e) {
             Rulles.setText("Правила");
-//            Rulles.setBackground(new Color(55, 152, 251 ));
-//            Rulles.setForeground(new Color(81, 17, 154));
             Rulles.setBackground(new Color(0,0,0));
             Rulles.setForeground(new Color(255, 18, 0));
         }
@@ -163,6 +160,7 @@ public class Menu {
             Rulles.setForeground(Color.black);
         }
     }
+
 
     public class SettingListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
@@ -206,6 +204,7 @@ public class Menu {
             SettingsB.setForeground(Color.black);
         }
     }
+
 
     public class ExitListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
