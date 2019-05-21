@@ -17,6 +17,7 @@ public class Settings {
         setingsPanel = new JPanel();
         setingsPanelGoBack = new JPanel();
         ButtonGroup group = new ButtonGroup();
+
         btns = new Audio("/home/farida/DPrograms/Git/JavaProj/GlJ8.9/probnick/gallows/btn.wav",1.0);
 
         setingsFrame.getContentPane().add(BorderLayout.CENTER, setingsPanel);
@@ -37,8 +38,9 @@ public class Settings {
         setingLabel.setFont((new Font("Serif", Font.CENTER_BASELINE, 20)));
 
         soundOffB.addActionListener(new Settings.SoundOffListener());
-        soundOnB.addActionListener(new Settings.SoundOnListener());
         soundOffB.setBackground(Color.PINK);
+
+        soundOnB.addActionListener(new Settings.SoundOnListener());
         soundOnB.setBackground(Color.PINK);
 
         group.add(soundOffB);
